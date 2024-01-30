@@ -198,13 +198,13 @@ hugo        1776    1679  0 11:48 pts/1    00:00:00 grep --color=auto sleep
 
 🌞 Récupérer le fichier meow
 
-```
+```bash
 [hugo@localhost /]$ sudo wget https://gitlab.com/it4lik/b1-linux-2023/-/raw/master/tp/2/meow?inline=false
 ```
 
 🌞 Trouver le dossier dawa/
 
-```
+```bash
 [hugo@localhost ~]$ file meow
 meow: Zip archive data, at least v2.0 to extract
 [hugo@localhost ~]$ unzip meow.zip
@@ -212,20 +212,76 @@ Archive:  meow.zip
   inflating: meow
 ```
 
-```
+```bash
 [hugo@localhost ~]$ file meow
 meow: XZ compressed data
-[hugo@localhost ~]$ xz -d meow.xz
+[hugo@localhost ~]$ unxz meow.xz
 ```
 
-```
+```bash
 [hugo@localhost ~]$ file meow
 meow: bzip2 compressed data, block size = 900k
-[hugo@localhost ~]$ bzip2 -d moew.bz2
+[hugo@localhost ~]$ bzip2 -d meow.bz2
 ```
 
+```bash
+[hugo@localhost ~]$ file meow
+meow: RAR archive data, v5
+[hugo@localhost ~]$ unrar e meow.rar
 ```
-[hugo@localhost ~]$ file moew
-moew: RAR archive data, v5
-[hugo@localhost ~]$ unrar x meow.rar
+
+```bash
+[hugo@localhost ~]$ file meow
+meow: gzip compressed data, from Unix, original size modulo 2^32 145049600
+[hugo@localhost ~]$ gunzip meow.gz
+```
+
+```bash
+[hugo@localhost ~]$ file meow
+meow: POSIX tar archive (GNU)
+[hugo@localhost ~]$ tar -xf meow.tar
+```
+
+🌞 Dans le dossier dawa/, déterminer le chemin vers
+
+- le seul fichier de 15Mo
+
+```bash
+[hugo@localhost ~]$ find -size 15M
+./dawa/folder31/19/file39
+```
+
+- le seul fichier qui ne contient que des 7
+
+```bash
+[hugo@localhost ~]$ grep "7777777777" -r
+dawa/folder43/38/file41:77777777777
+```
+
+- le seul fichier qui est nommé cookie
+
+```bash
+[hugo@localhost ~]$ find -name "cookie"
+./dawa/folder14/25/cookie
+```
+
+- le seul fichier caché (un fichier caché c'est juste un fichier dont le nom commence par un .)
+
+```bash
+[hugo@localhost ~]$ find /home/hugo/dawa/ -name ".*"
+/home/hugo/dawa/folder32/14/.hidden_file
+```
+
+- le seul fichier qui date de 2014
+
+```bash
+[hugo@localhost ~]$ find -newermt 20140101 -not -newermt 20150101
+./dawa/folder36/40/file43
+```
+
+- le seul fichier qui a 5 dossiers-parents
+
+```bash
+[hugo@localhost ~]$ find /home/hugo/dawa/ -path '*/*/*/*/*/*/*/*/*/*'
+/home/hugo/dawa/folder37/45/23/43/54/file43
 ```
