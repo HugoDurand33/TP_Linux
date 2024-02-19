@@ -505,3 +505,23 @@ Restart=always
 ```
 
 - normalement, quand tu kill il est donc relancé automatiquement
+
+```bash
+[hugo@node system]$ ps -ef | grep nc
+dbus         652       1  0 09:47 ?        00:00:00 /usr/bin/dbus-broker-lanch --scope system --audit
+hugo        1690    1258  0 11:56 pts/0    00:00:00 grep --color=auto nc
+
+
+[hugo@node system]$ sudo systemctl start tp3_nc
+[hugo@node system]$ ps -ef | grep nc
+dbus         652       1  0 09:47 ?        00:00:00 /usr/bin/dbus-broker-lanch --scope system --audit
+root        1695       1  0 11:56 ?        00:00:00 /usr/bin/nc -l 24456 -k
+hugo        1697    1258  0 11:56 pts/0    00:00:00 grep --color=auto nc
+
+
+[hugo@node system]$ sudo kill -15 1695
+[hugo@node system]$ ps -ef | grep nc
+dbus         652       1  0 09:47 ?        00:00:00 /usr/bin/dbus-broker-lanch --scope system --audit
+root        1701       1  0 11:56 ?        00:00:00 /usr/bin/nc -l 24456 -k
+hugo        1703    1258  0 11:56 pts/0    00:00:00 grep --color=auto nc
+```
